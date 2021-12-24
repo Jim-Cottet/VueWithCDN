@@ -4,36 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
     <title>Vue with CDN</title>
 </head>
 <body>
     <div id="app">
-        
-        <h1>     
-            <div>VueMart</div>
-        </h1>
 
-        <h2>Shopping cart</h2>
- 
-        <table class="table-fixed mt-20">
-            <thead>
-              <tr>
-                <th>Fruit</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in Basket">
-                <td class="px-8 py-2">{{item.label}}</td>
-                <td class="px-8 py-2">{{item.cost}}</td>
-              </tr>
-              <tr>
-                <td class="px-8 py-2">Total</td>
-                <td class="px-8 py-2">{{ sum }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div>
+            <h1>List</h1>
+            
+            <table class="table-fixed mt-20">
+                <thead>
+                <tr>
+                    <th>Fruit</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in Basket">
+                    <td class="px-8 py-2">{{item.label}}</td>
+                    <td class="px-8 py-2">{{item.cost}}</td>
+                </tr>
+                <tr>
+                    <td class="px-8 py-2">Total</td>
+                    <td class="px-8 py-2">{{ sum }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div>
+            <h1>Click to see your favorite color !</h1>
+            <input 
+            type="button" 
+            value="Click !"
+            @click="showColor">
+        </div>
+
+        <div>
+            <h1>Change color value !</h1>
+            <input 
+            type="text"
+            placeholder="color"
+            v-model="favColor"
+            @keyup.enter="changeColor">
+        </div>
+    
+    
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -44,6 +60,8 @@
         el : '#app',
         
         data: {
+
+            favColor: "",
 
             Basket: [
             {
@@ -81,6 +99,17 @@
 
             }
 
+        },
+
+        methods: {
+
+            changeColor(){
+                alert(this.favColor)
+            },
+
+            showColor(){
+                alert(this.favColor)
+            }
         }
     });
     
