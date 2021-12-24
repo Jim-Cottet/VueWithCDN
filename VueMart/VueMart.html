@@ -4,44 +4,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Vue with CDN</title>
 </head>
 <body>
     <div id="app">
         
-        <h1>VueMart</h1>
+        <h1>     
+            <div>VueMart</div>
+        </h1>
 
         <h2>Shopping cart</h2>
-
-        <ul>
-            <li>Nombre de pommes : {{ apples }}</li>
-            <li>Nombre de bananes : {{ bananas }}</li>
-            <li>Nombre de noix de coco : {{ coconuts}}</li>
-        </ul>
-
-        <p>Total des fruits : {{ sum }}</p>
+ 
+        <table class="table-fixed mt-20">
+            <thead>
+              <tr>
+                <th>Fruit</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in Basket">
+                <td class="px-8 py-2">{{item.label}}</td>
+                <td class="px-8 py-2">{{item.cost}}</td>
+              </tr>
+              <tr>
+                <td class="px-8 py-2">Total</td>
+                <td class="px-8 py-2">{{ sum }}</td>
+              </tr>
+            </tbody>
+          </table>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
    
    <script>
+    
     const mart = new Vue({
         el : '#app',
         
         data: {
-            apples: 9,
-            bananas: 98,
-            coconuts: 95,
-        },
+
+            Basket: [
+            {
+                label: 'Apples',
+                cost: 10,
+                url: '/apples.html'
+            },
+            {
+                label: 'Bananas',
+                cost: 8,
+                url: '/bananas.html'
+            },
+            {
+                label: 'Coconuts',
+                cost: 12,
+                url: '/coconuts.html'
+            }
+        ]
+        
+    },
 
         computed: {
 
             sum() {
-                return this.apples + this.bananas + this.coconuts
+                
+                let total = 0
+
+                this.Basket.forEach(item => {
+
+                    total += item.cost
+                    
+                });
+
+                return total
+
             }
 
         }
     });
+    
     </script>
 </body>
 </html>
